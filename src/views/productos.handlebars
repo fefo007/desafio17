@@ -1,0 +1,10 @@
+<div>
+    <button  class="btn  btn-primary mb-2" onclick="window.location.href='/user/home'">volver al home</button>
+    {{#each productos}}
+        <img src="{{url}}" alt="{{nombre}}">
+        <p>{{nombre}}</p>
+        <p>{{plataforma}}</p>
+        <button class="btn  btn-primary mb-2">Comprar</button>
+        <button class="btn  btn-primary mb-2">+ carrito</button>
+    {{/each}}
+</div>

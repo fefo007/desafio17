@@ -1,0 +1,103 @@
+------>SERVIDOR NORMAL CON NODE
+
+PS D:\Back-End\desafio15\src> node server.js
+Servidor Http con Websockets escuchando en el puerto 8080
+
+PS D:\Back-End\desafio15> tasklist /fi "imagename eq node.exe"
+
+Nombre de imagen               PID Nombre de sesión Núm. de ses Uso de memor
+========================= ======== ================ =========== ============
+node.exe                      4508 Console                    5    45,796 KB
+PS D:\Back-End\desafio15> 
+
+------>SERVIDOR NORMAL CON NODEMON 
+
+PS D:\Back-End\desafio15\src> nodemon server.js
+[nodemon] 2.0.19
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node server.js`
+Servidor Http con Websockets escuchando en el puerto 8080
+┌───────────────────────────────────┐
+│ New version of nodemon available! │
+│ Current Version: 2.0.19           │
+│ Latest Version: 2.0.20            │
+└───────────────────────────────────┘
+PS D:\Back-End\desafio15> tasklist /fi "imagename eq node.exe"
+
+Nombre de imagen               PID Nombre de sesión Núm. de ses Uso de memor
+========================= ======== ================ =========== ============
+node.exe                      7704 Console                    5    31,420 KB
+node.exe                      7696 Console                    5    45,288 KB
+PS D:\Back-End\desafio15> 
+
+-----> CON FOREVER EN EL PUERTO 8081, 8082, 8083
+PS D:\Back-End\desafio15> tasklist /fi "imagename eq node.exe"
+
+Nombre de imagen               PID Nombre de sesión Núm. de ses Uso de memor
+========================= ======== ================ =========== ============
+node.exe                     13088 Console                    5    33,072 KB
+node.exe                     13008 Console                    5    46,048 KB
+node.exe                     10528 Console                    5    35,540 KB
+node.exe                     12132 Console                    5    44,784 KB
+node.exe                      3608 Console                    5    44,548 KB
+node.exe                       192 Console                    5    52,760 KB
+PS D:\Back-End\desafio15>   
+
+CON PM2 GENERO 4 CLUSTERS EN LOS PUERTOS 8082,8083,8084,8085 , 1 FORK EN 8081 Y POR DEFECTO 8080 FORK
+PARA IR PROBANDO VARIEDAD DE CONBINACIONES
+
+PS D:\Back-End\desafio15\src>
+pm2 start server.js --name="serverFork2" --watch -- -p 8081
+pm2 start server.js --name="serverCluster1" --watch -i max -- -p 8082
+pm2 start server.js --name="serverCluster2" --watch -i max -- -p 8083
+pm2 start server.js --name="serverCluster3" --watch -i max -- -p 8084
+pm2 start server.js --name="serverCluster4" --watch -i max -- -p 8085
+
+----->QUE ES ESTE ERROR??
+[PM2][ERROR] Script not found: D:\Back-End\desafio15\src\name=serverCluster1
+
+PS D:\Back-End\desafio15\src> pm2 list
+┌─────┬───────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id  │ name              │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼───────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 0        │ 0      │ 4    │ stopped   │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 2   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 11768    │ 0      │ 2    │ stopping  │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 3   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 13840    │ 0s     │ 2    │ online    │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 4   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 0        │ 0      │ 1    │ stopped   │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 5   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 11812    │ 0      │ 0    │ stopping  │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 6   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 5252     │ 0      │ 0    │ stopping  │ 0%       │ 0b       │ Doc… │ enabled  │
+│ 7   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 10452    │ 1s     │ 0    │ online    │ 0%       │ 58.5mb   │ Doc… │ enabled  │
+│ 8   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 7040     │ 1s     │ 0    │ online    │ 0%       │ 57.9mb   │ Doc… │ enabled  │
+│ 9   │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 2676     │ 1s     │ 0    │ online    │ 0%       │ 58.0mb   │ Doc… │ enabled  │
+│ 10  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 12000    │ 1s     │ 0    │ online    │ 0%       │ 57.3mb   │ Doc… │ enabled  │
+│ 11  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 10304    │ 1s     │ 0    │ online    │ 0%       │ 57.6mb   │ Doc… │ enabled  │
+│ 12  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 2192     │ 0s     │ 0    │ online    │ 0%       │ 57.3mb   │ Doc… │ enabled  │
+│ 13  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 6836     │ 0s     │ 0    │ online    │ 0%       │ 57.2mb   │ Doc… │ enabled  │
+│ 14  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 12440    │ 0s     │ 0    │ online    │ 0%       │ 51.6mb   │ Doc… │ enabled  │
+│ 15  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 7064     │ 0s     │ 0    │ online    │ 0%       │ 43.4mb   │ Doc… │ enabled  │
+│ 16  │ serverCluster1    │ default     │ 1.0.0   │ cluster │ 13712    │ 0s     │ 0    │ online    │ 0%       │ 39.3mb   │ Doc… │ enabled  │
+│ 0   │ serverFork2       │ default     │ 1.0.0   │ fork    │ 0        │ 0      │ 5    │ stopped   │ 0%       │ 0b       │ Doc… │ enabled  │
+└─────┴───────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+PS D:\Back-End\desafio15\src>
+
+---->Y ESTE ERROR?
+PS D:\Back-End\desafio15\src> pm2 start server.js -- name="serverFork2" --watch -- -p 8081
+[PM2][ERROR] Script already launched, add -f option to force re-execution
+
+
+-----> ARRANCANDO SOLO NGINX PARA VER SI FUNCIONA 
+C:\Users\Documentos\Desktop\nginx-1.22.1>start nginx
+
+C:\Users\Documentos\Desktop\nginx-1.22.1>
+
+C:\Users\Documentos\Desktop\nginx-1.22.1>tasklist /fi "imagename eq nginx.exe"
+
+Nombre de imagen               PID Nombre de sesión Núm. de ses Uso de memor
+========================= ======== ================ =========== ============
+nginx.exe                    12120 Console                    7     8,232 KB
+nginx.exe                     2716 Console                    7     8,296 KB
+
+C:\Users\Documentos\Desktop\nginx-1.22.1>
+

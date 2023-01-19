@@ -1,0 +1,26 @@
+<div>
+    <button  class="btn  btn-primary mb-2" onclick="window.location.href='/user/home'">volver al home</button>
+    <table class="table table-info table-striped ">
+        <thead>
+            <tr>
+                <th scope="col"> Nombre </th>
+                <th scope="col"> Precio </th>
+                <th scope="col"> Imagen </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each carrito}}
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>${{precio}}</td>
+                    <td>
+                        <img src= "{{url}}" width="100px" alt= "{{nombre}}">
+                    </td>
+                    <td>
+                        <button class="btn  btn-primary mb-2">borrar del carrito</button>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
