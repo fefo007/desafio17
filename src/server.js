@@ -20,7 +20,7 @@ app.use('/productos',routerProd)
 
 app.engine("handlebars",engine())
 app.set("view engine","handlebars")
-app.set("views","./views")
+app.set("views","src/views")
 
 app.get('/',(req,res)=>{
     res.redirect('/user/login')
